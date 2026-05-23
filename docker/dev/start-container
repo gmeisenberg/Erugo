@@ -58,6 +58,7 @@ chown -R erugo:erugo /var/www/html/storage/database 2>/dev/null || true
 # Install composer dependencies if vendor directory is missing or empty
 if [ ! -d /var/www/html/vendor ] || [ ! -f /var/www/html/vendor/autoload.php ]; then
     echo "Installing composer dependencies..."
+    su-exec erugo composer update
     if ! su-exec erugo composer install --no-interaction; then
         echo "ERROR: Composer install failed!"
         exit 1
